@@ -4,9 +4,14 @@ import JoblyApi from "../api";
 import CompanyCard from "./CompanyCard";
 import LoadingSpinner from "../common/LoadingSpinner";
 
-/** Returns a page listing all companies
- * 
- * 
+/** Show page with list of companies.
+ *
+ * On mount, loads companies from API.
+ * Re-loads filtered companies on submit from search form.
+ *
+ * This is routed to at /companies
+ *
+ * Routes -> { CompanyCard, SearchForm }
  */
 function CompanyList() {
     console.debug("Company List")
@@ -15,7 +20,7 @@ function CompanyList() {
         console.debug("CompanyList useEffect getCompaniesOnMount")
         search()
     }, [])
-    // DOCUMENT HERE
+    /** Triggered by search form submit; reloads companies. */
     async function search(name) {
         let companies = await JoblyApi.getCompanies(name)
         setCompanies(companies)

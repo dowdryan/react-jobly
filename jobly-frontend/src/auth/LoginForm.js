@@ -2,7 +2,16 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Alert from "../common/Alert";
 
-// DOCUMENT HERE
+/** Login form.
+ *
+ * Shows form and manages update to state on changes.
+ * On submission:
+ * - calls login function prop
+ * - redirects to /companies route
+ *
+ * Routes -> LoginForm -> Alert
+ * Routed as /login
+ */
 function LoginForm({login}) {
     const history = useHistory()
     const [formData, setFormData] = useState({
@@ -16,7 +25,11 @@ function LoginForm({login}) {
         "formData=", formData,
         "formErrors", formErrors,
     )
-    // DOCUMENT HERE
+    
+   /** Handle form submit:
+   *
+   * Calls login func prop and, if successful, redirect to /companies.
+   */
     async function handleSubmit(event) {
         event.preventDefault()
         let result = await login(formData)
@@ -26,7 +39,7 @@ function LoginForm({login}) {
             setFormErrors(result.errors)
         }
     }
-    // DOCUMENT HERE
+    /** Update form data field */
     function handleChange(event) {
         const {name, value} = event.target
         setFormData(l => ({...l, [name]: value}))

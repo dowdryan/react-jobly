@@ -1,18 +1,28 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
 
-// DOCUMENT HERE
+/** Search widget.
+ *
+ * Appears on CompanyList and JobList so that these can be filtered
+ * down.
+ *
+ * This component doesn't *do* the searching, but it renders the search
+ * form and calls the `searchFor` function prop that runs in a parent to do the
+ * searching.
+ *
+ * { CompanyList, JobList } -> SearchForm
+ */
 function SearchForm({ searchFor }) {
     console.debug("SearchForm", "searchFor=", typeof searchFor);
     const [searchTerm, setSearchTerm] = useState("");
     
-    // DOCUMENT HERE
+    /** Tell parent to filter */
     function handleSubmit(event) {
         event.preventDefault()
         searchFor(searchTerm.trim() || undefined);
         setSearchTerm(searchTerm.trim());
     }
-    // DOCUMENT HERE
+    /** Update form fields */
     function handleChange(event) {
         setSearchTerm(event.target.value)
     }

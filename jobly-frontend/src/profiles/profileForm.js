@@ -5,6 +5,19 @@ import UserContext from "../auth/UserContext";
 import useTimedMessage from "../hooks/useTimedMessage"; // eslint-disable-next-line
 
 
+/** Profile editing form.
+ *
+ * Displays profile form and handles changes to local form state.
+ * Submitting the form calls the API to save, and triggers user reloading
+ * throughout the site.
+ *
+ * Confirmation of a successful save is normally a simple <Alert>, but
+ * you can opt-in to our fancy limited-time-display message hook,
+ * `useTimedMessage`, but switching the lines below.
+ *
+ * Routed as /profile
+ * Routes -> ProfileForm -> Alert
+ */
 function ProfileForm() {
     const { currentUser, setCurrentUser } = useContext(UserContext);
     const [formData, setFormData] = useState({
@@ -15,6 +28,7 @@ function ProfileForm() {
         password: "",
     })
     const [formErrors, setFormErrors] = useState([])
+    // switch to use our fancy limited-time-display message hook
     const [saveConfirmed, setSaveConfirmed] = useState(false);
   // const [saveConfirmed, setSaveConfirmed] = useTimedMessage()
     console.debug(
@@ -24,7 +38,13 @@ function ProfileForm() {
         "formErrors=", formErrors,
         "saveConfirmed=", saveConfirmed,
     )
-    // DOCUMENT HERE
+    /** on form submit:
+        * - attempt save to backend & report any errors
+        * - if successful
+        *   - clear previous error messages and password
+        *   - show save-confirmed message
+        *   - set current user info throughout the site
+    */
     async function handleSubmit(event) {
         event.preventDefault()
         let profileData = {
@@ -45,9 +65,11 @@ function ProfileForm() {
         setFormData(f => ({...f, password: ""}))
         setFormErrors([])
         setSaveConfirmed(true)
-        // DOCUMENT HERE
+        // trigger reloading of user information throughout the site
         setCurrentUser(updatedUser)
     }
+
+    /** Handle form data changing */
     function handleChange(event) {
         const {name, value} = event.target
         setFormData(f => ({...f, name: value}))

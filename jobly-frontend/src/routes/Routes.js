@@ -10,7 +10,13 @@ import SignupForm from "../auth/SignupForm";
 import PrivateRoute from "./PrivateRoute";
 
 
-// DOCUMENT HERE
+/** Site-wide routes.
+ *
+ * Parts of site should only be visitable when logged in. Those routes are
+ * wrapped by <PrivateRoute>, which is an authorization component.
+ *
+ * Visiting a non-existant route redirects to the homepage.
+ */
 function Routes({ login, signup }) {
     console.debug(
         "Routes",

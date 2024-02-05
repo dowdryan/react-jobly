@@ -3,8 +3,12 @@ import "./JobCard.css";
 import UserContext from "../auth/UserContext";
 
 
-/** Shows info about a job
- * ...
+/** Show limited information about a job.
+ *
+ * Is rendered by JobCardList to show a "card" for each job.
+ *
+ * Receives apply func prop from parent, which is called on apply.
+ *
  * JobCardList -> JobCard
  */
 function JobCard({id, title, salary, equity, companyName}) {
