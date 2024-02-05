@@ -3,6 +3,14 @@ import { Link, NavLink } from "react-router-dom";
 import UserContext from "../auth/UserContext";
 import "./Navigation.css";
 
+
+/** Navigation bar for site. Shows up on every page.
+ *
+ * When user is logged in, shows links to main areas of site. When not,
+ * shows link to Login and Signup forms.
+ *
+ * Rendered by App.
+ */
 function Navigation({ logout }) {
     const {currentUser} = useContext(UserContext)
     console.debug("Navigation", "currentUser=", currentUser)
